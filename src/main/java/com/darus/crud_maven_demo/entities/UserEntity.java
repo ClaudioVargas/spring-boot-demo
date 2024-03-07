@@ -1,11 +1,16 @@
 package com.darus.crud_maven_demo.entities;
 
+import java.util.Set;
+
 import org.springframework.validation.annotation.Validated;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -14,17 +19,17 @@ import jakarta.persistence.GenerationType;
 
 @Validated
 @Entity
-@Table(name="user")
+@Table(name="users")
 public class UserEntity {
 	
 	public UserEntity() {}
 
-	public UserEntity(Long id, String name, String email, boolean isActive) {
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.isActive = isActive;
-	}
+//	public UserEntity(Long id, String name, String email, boolean isActive) {
+//		this.id = id;
+//		this.name = name;
+//		this.email = email;
+//		this.active = isActive;
+//	}
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -42,8 +47,25 @@ public class UserEntity {
 	
 
 	@Column
-	private boolean isActive;
+	@NotEmpty
+	private boolean active;
 	
+	@OneToMany(mappedBy="user")
+    private Set<PublicationEntity> publications;
+	
+	@ManyToOne
+    @JoinColumn(name="address_id", nullable=false)
+    private AddressEntity address;
+	
+	
+
+	public AddressEntity getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressEntity address) {
+		this.address = address;
+	}
 
 	public Long getId() {
 		return id;
@@ -70,13 +92,22 @@ public class UserEntity {
 	}
 
 	public boolean isActive() {
-		return isActive;
+		return active;
 	}
 
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
-	
-	
+	public Set<PublicationEntity> getPublications() {
+		return publications;
+	}
+
+	public void setPublications(Set<PublicationEntity> publications) {
+		this.publications = publications;
+	}
+
+
+
+
 }

@@ -43,6 +43,6 @@ public class UserService implements IUserService {
 
 	@Override
 	public ArrayList<UserEntity> findByIsActive(boolean isActive) {
-		return (ArrayList<UserEntity>) userRepository.findByIsActive(true);
+		return (ArrayList<UserEntity>) userRepository.findByActive(true);
 	}
 }

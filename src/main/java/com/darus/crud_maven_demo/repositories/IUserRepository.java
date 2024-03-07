@@ -10,7 +10,7 @@ import com.darus.crud_maven_demo.entities.UserEntity;
 @Repository
 public interface IUserRepository extends JpaRepository<UserEntity, Long> {
 	
-	ArrayList<UserEntity> findByIsActive(boolean isActive);
+	ArrayList<UserEntity> findByActive(boolean active);
 	
 
 }
