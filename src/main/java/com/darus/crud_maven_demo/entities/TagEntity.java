@@ -15,6 +15,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Validated
@@ -35,12 +36,11 @@ public class TagEntity {
 
 	@Column
 	@NotEmpty
-	@Email
 	private String description;
 	
 
 	@Column
-	@NotEmpty
+	@NotNull
 	private boolean active;
 	
 	@ManyToMany
@@ -49,4 +49,46 @@ public class TagEntity {
 		joinColumns= @JoinColumn(name = "tag_id"),
 		inverseJoinColumns = @JoinColumn(name = "publication_id"))
     Set<PublicationEntity> publicationTags;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public Set<PublicationEntity> getPublicationTags() {
+		return publicationTags;
+	}
+
+	public void setPublicationTags(Set<PublicationEntity> publicationTags) {
+		this.publicationTags = publicationTags;
+	}
+	
+	
 }

@@ -4,7 +4,6 @@ import java.util.Set;
 
 import org.springframework.validation.annotation.Validated;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,9 +13,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Validated
@@ -24,7 +23,7 @@ import jakarta.validation.constraints.Size;
 @Table(name="publications")
 public class PublicationEntity {
 	
-	PublicationEntity(){}
+	public PublicationEntity(){}
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -40,7 +39,7 @@ public class PublicationEntity {
 	private String body;
 	
 	@Column
-	@NotEmpty
+	@NotNull
 	private boolean active;
 
 	@ManyToOne

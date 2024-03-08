@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Validated
 @Entity
@@ -29,11 +30,11 @@ public class AddressEntity {
 	private String street; 
 
 	@Column(nullable = false)
-	@NotEmpty
+	@NotNull
 	private Long number;
 	
 	@Column
-	@NotEmpty
+	@NotNull
 	private boolean active;
 	
 	@OneToMany(mappedBy="address")
