@@ -1,9 +1,14 @@
 package com.darus.crud_maven_demo.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,8 +41,17 @@ public class UserController {
 	 }
 	 
 	 @PostMapping
-	 public UserEntity saveuser(@RequestBody UserEntity user) {
-		 return this.userService.saveUser(user);
+	 public ResponseEntity<?> saveUser(@RequestBody UserEntity request) {
+		 UserEntity newUser = null;
+		 Map<String, Object> response = new HashMap<>();
+		 try {
+			 newUser = userService.saveUser(request);
+		 } catch(DataAccessException e) {
+			 response.put("Error", e);
+			 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		 }
+		 response.put("user", newUser);
+		 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	 }
 	 
 	 @PutMapping(path = "/{id}")
