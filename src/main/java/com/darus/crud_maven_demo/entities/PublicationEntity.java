@@ -1,5 +1,7 @@
 package com.darus.crud_maven_demo.entities;
 
+import java.util.Set;
+
 import org.springframework.validation.annotation.Validated;
 
 import jakarta.persistence.CascadeType;
@@ -9,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -39,10 +43,18 @@ public class PublicationEntity {
 	@NotEmpty
 	private boolean active;
 
-	 @ManyToOne
-	 @JoinColumn(name="user_id", nullable=false)
-	 private UserEntity user;
-
+	@ManyToOne
+	@JoinColumn(name="user_id", nullable=false)
+	private UserEntity user;
+	 
+	@ManyToMany
+	@JoinTable(
+		name = "publicaion_tag", 
+		joinColumns = @JoinColumn(name = "publication_id"), 
+		inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    Set<TagEntity> publicationTags;
+	 
+	//SETTERS AND GETTERS 
 	public Long getId() {
 		return id;
 	}

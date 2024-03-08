@@ -24,13 +24,6 @@ public class UserEntity {
 	
 	public UserEntity() {}
 
-//	public UserEntity(Long id, String name, String email, boolean isActive) {
-//		this.id = id;
-//		this.name = name;
-//		this.email = email;
-//		this.active = isActive;
-//	}
-
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id;
