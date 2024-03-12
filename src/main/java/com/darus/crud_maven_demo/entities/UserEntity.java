@@ -49,8 +49,13 @@ public class UserEntity {
 	@OneToMany(mappedBy="user")
     private Set<PublicationEntity> publications;
 	
-	@ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
-    @JoinColumn(name="address_id", nullable=false)
+	@ManyToOne(
+			fetch = FetchType.EAGER ,
+			cascade=CascadeType.PERSIST)
+    @JoinColumn(
+    		name="address_id",
+    		nullable=false,
+    		referencedColumnName="id")
     private AddressEntity address;
 	
 	

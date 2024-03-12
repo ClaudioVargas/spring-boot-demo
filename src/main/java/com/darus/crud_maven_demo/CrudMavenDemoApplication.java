@@ -38,31 +38,31 @@ public class CrudMavenDemoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-//		AddressEntity address = new AddressEntity();
-//		address.setStreet("calle 1");
-//		address.setNumber( (long)11);
-//		address.setActive(true);
-//		
-//		UserEntity user = new UserEntity();
-//		user.setName("claudio");
-//		user.setEmail("claudio@mail.cl");
-//		user.setActive(true);
-//		user.setAddress(address);
-//		userRepository.save(user);
-//		
-//		PublicationEntity publication = new PublicationEntity();
-//		publication.setTitle("nba");
-//		publication.setBody("Pierden lo warrior");
-//		publication.setActive(true);
-//		publication.setUser(user);
-//		publicationRepository.save(publication);
-//
-//
-//		TagEntity tag = new TagEntity();
-//		tag.setName("deporte");
-//		tag.setDescription("todos los deportes");
-//		tag.setActive(true);
-//		tagRepository.save(tag);
+		AddressEntity address = new AddressEntity();
+		address.setStreet("calle 1");
+		address.setNumber( (long)11);
+		address.setActive(true);
+		
+		UserEntity user = new UserEntity();
+		user.setName("claudio");
+		user.setEmail("claudio@mail.cl");
+		user.setActive(true);
+		user.setAddress(address);
+		userRepository.save(user);
+		
+		PublicationEntity publication = new PublicationEntity();
+		publication.setTitle("nba");
+		publication.setBody("Pierden lo warrior");
+		publication.setActive(true);
+		publication.setUser(user);
+		publicationRepository.save(publication);
+
+
+		TagEntity tag = new TagEntity();
+		tag.setName("deporte");
+		tag.setDescription("todos los deportes");
+		tag.setActive(true);
+		tagRepository.save(tag);
 		
 		
 	}
