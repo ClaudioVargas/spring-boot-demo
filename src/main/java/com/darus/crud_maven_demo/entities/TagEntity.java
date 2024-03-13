@@ -48,7 +48,7 @@ public class TagEntity {
 		name = "publicaion_tag", 
 		joinColumns= @JoinColumn(name = "tag_id"),
 		inverseJoinColumns = @JoinColumn(name = "publication_id"))
-    Set<PublicationEntity> publicationTags;
+    Set<NewsEntity> publicationTags;
 
 	public Long getId() {
 		return id;
@@ -82,11 +82,11 @@ public class TagEntity {
 		this.active = active;
 	}
 
-	public Set<PublicationEntity> getPublicationTags() {
+	public Set<NewsEntity> getPublicationTags() {
 		return publicationTags;
 	}
 
-	public void setPublicationTags(Set<PublicationEntity> publicationTags) {
+	public void setPublicationTags(Set<NewsEntity> publicationTags) {
 		this.publicationTags = publicationTags;
 	}
 	

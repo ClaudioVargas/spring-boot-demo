@@ -1,8 +1,13 @@
 package com.darus.crud_maven_demo.entities;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -11,7 +16,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
@@ -21,8 +27,9 @@ import jakarta.validation.constraints.Size;
 import jakarta.persistence.GenerationType;
 
 @Validated
-@Entity
+@Entity( name="userEntity")
 @Table(name="users")
+@JsonIgnoreProperties({ "news", "newsLiked" })
 public class UserEntity {
 	
 	public UserEntity() {}
@@ -34,7 +41,7 @@ public class UserEntity {
 	@NotEmpty
 	@Column(nullable = false)
 	@Size(min=3, max=20)
-	private String name; 
+	private String name;
 
 	@Column
 	@NotEmpty
@@ -47,67 +54,85 @@ public class UserEntity {
 	private boolean active;
 	
 	@OneToMany(mappedBy="user")
-    private Set<PublicationEntity> publications;
-	
-	@ManyToOne(
-			fetch = FetchType.EAGER ,
-			cascade=CascadeType.PERSIST)
-    @JoinColumn(
-    		name="address_id",
-    		nullable=false,
-    		referencedColumnName="id")
-    private AddressEntity address;
+    private Set<NewsEntity> news;
 	
 	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinTable(
+		name = "users_liked_news", 
+		joinColumns = @JoinColumn(name = "user_id", referencedColumnName="id"),
+		inverseJoinColumns = @JoinColumn( name =" news_id", referencedColumnName="id" )
+	)
+//	private Set<NewsEntity> newsLiked = new HashSet<>();
+	private List<NewsEntity> newsLiked = new ArrayList<>();
 
-	public AddressEntity getAddress() {
-		return address;
-	}
-
-	public void setAddress(AddressEntity address) {
-		this.address = address;
-	}
 
 	public Long getId() {
 		return id;
 	}
 
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 
 	public String getName() {
 		return name;
 	}
 
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 
 	public String getEmail() {
 		return email;
 	}
 
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 
 	public boolean isActive() {
 		return active;
 	}
 
+
 	public void setActive(boolean active) {
 		this.active = active;
 	}
 
-	public Set<PublicationEntity> getPublications() {
-		return publications;
+
+	public Set<NewsEntity> getNews() {
+		return news;
 	}
 
-	public void setPublications(Set<PublicationEntity> publications) {
-		this.publications = publications;
+
+	public void setNews(Set<NewsEntity> news) {
+		this.news = news;
 	}
 
+
+	public List<NewsEntity> getNewsLiked() {
+		return newsLiked;
+	}
+
+
+	public void setNewsLiked(List<NewsEntity> newsLiked) {
+		this.newsLiked = newsLiked;
+	}
+
+
+	// SETTERS AND GETTERS
+
+
+
+
+	
 
 
 

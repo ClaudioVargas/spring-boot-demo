@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.darus.crud_maven_demo.entities.NewsEntity;
 import com.darus.crud_maven_demo.entities.UserEntity;
 import com.darus.crud_maven_demo.repositories.IUserRepository;
 
@@ -45,4 +46,12 @@ public class UserService implements IUserService {
 	public ArrayList<UserEntity> findByIsActive(boolean isActive) {
 		return (ArrayList<UserEntity>) userRepository.findByActive(true);
 	}
+
+	@Override
+	public ArrayList<?> findNewsById(Long id) {
+		// TODO Auto-generated method stub
+		return userRepository.findNewsById(id);
+	}
+
+
 }

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.darus.crud_maven_demo.services.UserService;
+import com.darus.crud_maven_demo.entities.NewsEntity;
 import com.darus.crud_maven_demo.entities.UserEntity;
 
 @CrossOrigin(origins = { "http://localhost:4200" })
@@ -36,6 +37,12 @@ public class UserController {
 	public ArrayList<UserEntity> getusers() {
 		return this.userService.findByIsActive(true);
 	}
+	
+	@GetMapping(path = "getNews/{id}")
+	public ArrayList<?> getNews(@PathVariable Long id) {
+		return this.userService.findNewsById(id);
+	}
+	
 
 	@GetMapping(path = "/{id}")
 	public Optional<UserEntity> getuserById(@PathVariable Long id) {

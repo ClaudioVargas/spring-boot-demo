@@ -1,16 +1,21 @@
 package com.darus.crud_maven_demo;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.darus.crud_maven_demo.entities.AddressEntity;
-import com.darus.crud_maven_demo.entities.PublicationEntity;
+import com.darus.crud_maven_demo.entities.NewsEntity;
 import com.darus.crud_maven_demo.entities.TagEntity;
 import com.darus.crud_maven_demo.entities.UserEntity;
-import com.darus.crud_maven_demo.repositories.IAddressRepository;
-import com.darus.crud_maven_demo.repositories.IPublicationRepository;
+import com.darus.crud_maven_demo.repositories.INewsRepository;
 import com.darus.crud_maven_demo.repositories.ITagRepository;
 import com.darus.crud_maven_demo.repositories.IUserRepository;
 
@@ -24,11 +29,7 @@ public class CrudMavenDemoApplication implements CommandLineRunner {
 	ITagRepository tagRepository;
 	
 	@Autowired
-	IPublicationRepository publicationRepository;
-	
-
-	@Autowired
-	IAddressRepository addressRepository;
+	INewsRepository newsRepository;
 	
 
 	public static void main(String[] args) {
@@ -38,24 +39,33 @@ public class CrudMavenDemoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		AddressEntity address = new AddressEntity();
-		address.setStreet("calle 1");
-		address.setNumber( (long)11);
-		address.setActive(true);
+
 		
 		UserEntity user = new UserEntity();
 		user.setName("claudio");
 		user.setEmail("claudio@mail.cl");
 		user.setActive(true);
-		user.setAddress(address);
 		userRepository.save(user);
 		
-		PublicationEntity publication = new PublicationEntity();
-		publication.setTitle("nba");
-		publication.setBody("Pierden lo warrior");
-		publication.setActive(true);
-		publication.setUser(user);
-		publicationRepository.save(publication);
+		NewsEntity news = new NewsEntity();
+		news.setTitle("nba");
+		news.setDescription("Pierden lo warrior");
+		news.setSummary("Los warrios pierden contra laker 100 contr 101");
+		Date date = new SimpleDateFormat( "yyyy-MM-dd" ).parse( "2010-05-20" );
+		news.setPublication_date(date);
+		news.setActive(true);
+		news.setUser(user);
+		newsRepository.save(news);
+		
+		List<NewsEntity> _userNewsLiked = new ArrayList<>();
+		_userNewsLiked.add(news);
+		
+//		Set<NewsEntity> userNewsLiked = new HashSet<>(_userNewsLiked);
+		
+		user.setNewsLiked(_userNewsLiked);
+		userRepository.save(user);
+		
+		
 
 
 		TagEntity tag = new TagEntity();
