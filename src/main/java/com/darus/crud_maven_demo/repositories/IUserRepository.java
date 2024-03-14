@@ -17,16 +17,4 @@ import java.util.Set;
 public interface IUserRepository extends JpaRepository<UserEntity, Long> {
 	
 	ArrayList<UserEntity> findByActive(boolean active);
-	
-//	UserEntity findNews(Long id);
-	
-
-	
-//	users_liked_news
-	@Query(value = "select  n.ID as id, n.USER_ID as userId, n.ACTIVE as active, n.PUBLICATION_DATE as publicationDate, n.TITLE as title, n.DESCRIPTION as description, n.SUMMARY as sumary  \r\n"
-			+ "from USERS_LIKED_NEWS  uln  \r\n"
-			+ "inner join news  n on n.id = uln.news_id\r\n"
-			+ "where uln.user_id = ?1", nativeQuery = true)
-	ArrayList<?> findNewsById(long id);	
-
 }

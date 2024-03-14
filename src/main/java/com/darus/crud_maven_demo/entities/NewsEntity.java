@@ -1,5 +1,6 @@
 package com.darus.crud_maven_demo.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -28,27 +31,36 @@ public class NewsEntity {
 	public NewsEntity(){}
 	
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotEmpty
 	@Column(nullable = false)
-	@Size(min=3, max=50)
+	@Size(min=3, max=200)
 	private String title; 
+	
+	@NotEmpty
+	@Column(nullable = false)
+	@Size(min=3, max=50)
+	private String subTitle; //news_site
 
 	@Column
 	@NotEmpty
 	@Size(min=3, max=200)
-	private String description;
-
-	@Column
+	private String description; // sumary
+	
 	@NotEmpty
+	@Column(nullable = false)
 	@Size(min=3, max=200)
-	private String summary;
+	private String urlImage; 
+
 
 	@Column
 	@NotNull
-	private Date publication_date;
+	private Date publishedAt;
+	
+	@Column
+	@NotNull
+	private Date updatedAt;
 	
 	@Column
 	@NotNull
@@ -58,11 +70,10 @@ public class NewsEntity {
 	@JoinColumn(name="user_id", nullable=false)
 	private UserEntity user;
 	
-	@ManyToMany(mappedBy = "newsLiked")
-	private List<UserEntity> users;
-	
+	@OneToMany(mappedBy = "news",
+			cascade = CascadeType.ALL)
+	private List<UserNewsEntity> newsTags = new ArrayList<>();
 
-	//SETTERS AND GETTERS
 	public Long getId() {
 		return id;
 	}
@@ -79,6 +90,14 @@ public class NewsEntity {
 		this.title = title;
 	}
 
+	public String getSubTitle() {
+		return subTitle;
+	}
+
+	public void setSubTitle(String subTitle) {
+		this.subTitle = subTitle;
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -87,20 +106,28 @@ public class NewsEntity {
 		this.description = description;
 	}
 
-	public String getSummary() {
-		return summary;
+	public String getUrlImage() {
+		return urlImage;
 	}
 
-	public void setSummary(String summary) {
-		this.summary = summary;
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
 	}
 
-	public Date getPublication_date() {
-		return publication_date;
+	public Date getPublishedAt() {
+		return publishedAt;
 	}
 
-	public void setPublication_date(Date publication_date) {
-		this.publication_date = publication_date;
+	public void setPublishedAt(Date publishedAt) {
+		this.publishedAt = publishedAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	public boolean isActive() {
@@ -119,19 +146,13 @@ public class NewsEntity {
 		this.user = user;
 	}
 
-	public List<UserEntity> getUsers() {
-		return users;
+	public List<UserNewsEntity> getNewsTags() {
+		return newsTags;
 	}
 
-	public void setUsers(List<UserEntity> users) {
-		this.users = users;
+	public void setNewsTags(List<UserNewsEntity> newsTags) {
+		this.newsTags = newsTags;
 	}
-
-	  
 	
-
-
-
-
 	
 }

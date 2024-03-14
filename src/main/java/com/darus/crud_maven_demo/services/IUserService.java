@@ -10,8 +10,6 @@ public interface IUserService {
 	
 	public ArrayList<UserEntity> findByIsActive(boolean isActive);
 	
-	public ArrayList<?> findNewsById(Long id);
-	
 	public Optional<UserEntity> getUserById(Long id);
 	
 	public UserEntity saveUser(UserEntity user);

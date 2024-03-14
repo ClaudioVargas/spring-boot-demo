@@ -47,11 +47,5 @@ public class UserService implements IUserService {
 		return (ArrayList<UserEntity>) userRepository.findByActive(true);
 	}
 
-	@Override
-	public ArrayList<?> findNewsById(Long id) {
-		// TODO Auto-generated method stub
-		return userRepository.findNewsById(id);
-	}
-
 
 }

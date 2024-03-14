@@ -57,14 +57,9 @@ public class UserEntity {
     private Set<NewsEntity> news;
 	
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinTable(
-		name = "users_liked_news", 
-		joinColumns = @JoinColumn(name = "user_id", referencedColumnName="id"),
-		inverseJoinColumns = @JoinColumn( name =" news_id", referencedColumnName="id" )
-	)
-//	private Set<NewsEntity> newsLiked = new HashSet<>();
-	private List<NewsEntity> newsLiked = new ArrayList<>();
+	@OneToMany(mappedBy = "user",
+			cascade = CascadeType.ALL)
+	private List<UserNewsEntity> userNews = new ArrayList<>();
 
 
 	public Long getId() {
@@ -117,23 +112,14 @@ public class UserEntity {
 	}
 
 
-	public List<NewsEntity> getNewsLiked() {
-		return newsLiked;
+	public List<UserNewsEntity> getUserNews() {
+		return userNews;
 	}
 
 
-	public void setNewsLiked(List<NewsEntity> newsLiked) {
-		this.newsLiked = newsLiked;
+	public void setUserNews(List<UserNewsEntity> userNews) {
+		this.userNews = userNews;
 	}
-
-
-	// SETTERS AND GETTERS
-
-
-
-
-	
-
 
 
 }
