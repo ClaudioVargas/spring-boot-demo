@@ -1,5 +1,6 @@
 package com.darus.crud_maven_demo;
 
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,30 +52,23 @@ public class CrudMavenDemoApplication implements CommandLineRunner {
 		user.setName("claudio");
 		user.setEmail("claudio@mail.cl");
 		user.setActive(true);
-		
-		
 		userRepository.save(user);
 		
 		
-//		NewsEntity news = new NewsEntity();
-//		news.setTitle("nba");
-//		news.setDescription("Pierden lo warrior");
-//		news.setSummary("Los warrios pierden contra laker 100 contr 101");
-//		Date date = new SimpleDateFormat( "yyyy-MM-dd" ).parse( "2010-05-20" );
-//		news.setPublication_date(date);
-//		news.setActive(true);
-//		news.setUser(user);
-//		newsRepository.save(news);
-//		
-//		NewsEntity news2 = new NewsEntity();
-//		news2.setTitle("nba");
-//		news2.setDescription("Pierden lo warrior");
-//		news2.setSummary("Los warrios pierden contra laker 100 contr 101");
-//		Date date2 = new SimpleDateFormat( "yyyy-MM-dd" ).parse( "2010-05-20" );
-//		news2.setPublication_date(date2);
-//		news2.setActive(true);
-//		news2.setUser(user);
-//		newsRepository.save(news2);
+		NewsEntity news = new NewsEntity();
+
+		news.setId((long)1);
+		news.setTitle("tenis");
+		news.setSubTitle("gana nadal");
+		news.setDescription("Los warrios pierden contra laker 100 contr 101");
+		news.setUrlImage("https://image.cl");
+		Date date = new SimpleDateFormat( "yyyy-MM-dd" ).parse( "2010-05-20" );
+		news.setPublishedAt(date);
+		news.setUpdatedAt(date);
+		news.setActive(true);
+		news.setUser(user);
+		newsRepository.save(news);
+
 		
 //		UserNewsEntity userNews = new UserNewsEntity();
 //		userNews.setNews(news);

@@ -16,13 +16,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import com.darus.crud_maven_demo.entities.UserEntity;
-import com.darus.crud_maven_demo.services.UserService;
 
 @DataJpaTest
 class IUserRepositoryTest {
-	
-//	@Autowired
-//	private UserService userService;
 	
 	@Autowired
 	TestEntityManager testEntityManager;
@@ -47,6 +43,7 @@ class IUserRepositoryTest {
 
 	@AfterEach
 	void tearDown() throws Exception {
+		
 	}
 
 	@Test
