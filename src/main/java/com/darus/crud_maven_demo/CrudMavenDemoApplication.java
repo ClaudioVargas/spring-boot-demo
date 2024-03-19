@@ -52,14 +52,9 @@ public class CrudMavenDemoApplication implements CommandLineRunner {
 		user.setEmail("claudio@mail.cl");
 		user.setActive(true);
 		
-		UserEntity user2 = new UserEntity();
-		user2.setName("cindy");
-		user2.setEmail("cindy@mail.cl");
-		user2.setActive(true);
 		
 		userRepository.save(user);
 		
-		userRepository.save(user2);
 		
 //		NewsEntity news = new NewsEntity();
 //		news.setTitle("nba");
